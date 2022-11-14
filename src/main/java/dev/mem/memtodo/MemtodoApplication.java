@@ -8,7 +8,7 @@ public class MemtodoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MemtodoApplication.class, args);
-		System.out.println("MKZ");
+		System.out.println("*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*");
 	}
 
 }
