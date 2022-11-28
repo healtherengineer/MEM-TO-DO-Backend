@@ -1,4 +1,4 @@
-package dev.mem.memtodo.core.utilities.results;
+package dev.mem.memtodo.utilities.results;
 
 public class ErrorResult extends Result {
 
