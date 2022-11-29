@@ -1,8 +1,10 @@
 package dev.mem.memtodo.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
@@ -21,6 +23,7 @@ public class Category {
     @Column(name = "name", nullable = false, length = 100, unique = true)
     private String name;
 
+   // @JsonFormat(pattern = "yyyy/MM/dd")
     @Column(name = "created_at", nullable = false)
-    private Date createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 }
