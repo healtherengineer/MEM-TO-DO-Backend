@@ -25,6 +25,9 @@ public class ToDo {
     @Column(name = "is_finished", nullable = false)
     private boolean isFinished;
 
+    @Column(name = "priority", nullable = true) // 1 = low, 2 = normal, 3 = high
+    private int priority;
+
     @Column(name = "deadline", nullable = true)
     private Date deadline;
 
