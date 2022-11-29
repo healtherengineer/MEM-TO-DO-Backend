@@ -1,4 +1,7 @@
 package dev.mem.memtodo.repository;
 
-public class UserRepository {
+import dev.mem.memtodo.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UserRepository extends JpaRepository<User, Integer> {
 }

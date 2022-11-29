@@ -1,5 +1,6 @@
 package dev.mem.memtodo.model;
 
+import dev.mem.memtodo.dto.ToDoRequestDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -37,4 +38,11 @@ public class ToDo {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    public ToDo(ToDoRequestDto toDoRequestDto, ToDoList toDoList, Category category) {
+        // DONUSUMLER YAPILACAK
+//        this.postId = postTemporaryDTO.getPostId();
+//        this.message = postTemporaryDTO.getMessage();
+//        this.user = user;
+    }
 }
