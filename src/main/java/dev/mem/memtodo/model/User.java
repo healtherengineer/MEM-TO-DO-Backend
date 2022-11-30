@@ -1,9 +1,11 @@
 package dev.mem.memtodo.model;
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 @Getter
 @Setter
@@ -33,6 +35,7 @@ public class User {
     @Column(name = "email", nullable = false, length = 100, unique = true)
     private String email;
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Column(name = "created_at", nullable = false)
-    private Date createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now(ZoneId.of("Europe/Istanbul"));
 }
