@@ -17,12 +17,6 @@ public class ToDoListController {
     @Autowired
     private ToDoListService toDoListService;
 
-    @GetMapping("hello")
-    public String hi() {
-        return "Welcome to TodoList Api";
-    }
-
-
     @GetMapping("getByToDoListId")
     public DataResult<ToDoList> getByToDoListId(@RequestParam int id) {
         return this.toDoListService.getByToDoListId(id);

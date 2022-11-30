@@ -17,5 +17,5 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
     @Query("")
     List<ToDo> getTodosByCategoryId(int id);
-    //Category e göre to-do ları listeleyen birşeye ihtiyaç duyabiliriz.Sorgusu sonra yazılacak.
+    //todo:Category e göre to-do ları listeleyen birşeye ihtiyaç duyabiliriz.Sorgusu sonra yazılacak.
 }

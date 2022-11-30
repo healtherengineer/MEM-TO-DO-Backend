@@ -83,7 +83,7 @@ public class CategoryManager implements CategoryService {
         if (!todoList.isEmpty()) {
             return new SuccessDataResult<>(todoList);
         } else {
-            return new ErrorDataResult<>(todoList, "TodoList is empty!");
+            return new ErrorDataResult<>(todoList, "TodosList is empty!");
         }
     }
 }

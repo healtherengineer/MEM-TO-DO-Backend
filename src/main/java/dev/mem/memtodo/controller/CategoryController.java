@@ -17,13 +17,7 @@ public class CategoryController {
 
     @Autowired
     private CategoryService categoryService;
-
-    @GetMapping("hi")
-    public String hello() {
-        return "Welcome to MEM Todo Project";
-    }
-
-
+    
     @GetMapping("getByCategoryId")
     public DataResult<Category> getByCategoryId(@RequestParam int id) {
         return this.categoryService.getByCategoryId(id);
