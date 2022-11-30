@@ -18,19 +18,19 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
     
-    @GetMapping("getByCategoryId")
-    public DataResult<Category> getByCategoryId(@RequestParam int id) {
-        return this.categoryService.getByCategoryId(id);
+    @GetMapping("getCategoryByCategoryId")
+    public DataResult<Category> getCategoryByCategoryId(@RequestParam int id) {
+        return this.categoryService.getCategoryByCategoryId(id);
     }
 
-    @GetMapping("getByName")
-    public DataResult<Category> getByName(@RequestParam String name) {
-        return this.categoryService.getByName(name);
+    @GetMapping("getCategoryByName")
+    public DataResult<Category> getCategoryByName(@RequestParam String name) {
+        return this.categoryService.getCategoryByName(name);
     }
 
     @PostMapping("save")
     public Result addCategory(@RequestBody Category category) {
-        return this.categoryService.addCategory(category);
+        return this.categoryService.save(category);
     }
 
     @PostMapping("delete")
@@ -38,20 +38,8 @@ public class CategoryController {
         return this.categoryService.deleteById(categoryId);
     }
 
-    @PostMapping("update")
-    public Result updateCategory(@RequestParam int categoryId, @RequestBody Category category) {
-
-        return this.categoryService.updateCategory(categoryId, category);
-    }
-
     @GetMapping("getAll")
     public DataResult<List<Category>> getAll() {
         return this.categoryService.getAll();
     }
-
-    @GetMapping("getTodosByCategoryId")
-    public DataResult<List<ToDo>> getTodosByCategoryId(int id) {
-        return this.categoryService.getTodosByCategoryId(id);
-    }
-
 }

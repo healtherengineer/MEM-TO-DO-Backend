@@ -1,5 +1,6 @@
 package dev.mem.memtodo.controller;
 
+import dev.mem.memtodo.dto.ToDoListRequestDto;
 import dev.mem.memtodo.model.ToDoList;
 import dev.mem.memtodo.service.abstracts.ToDoListService;
 import dev.mem.memtodo.utilities.results.DataResult;
@@ -17,21 +18,19 @@ public class ToDoListController {
     @Autowired
     private ToDoListService toDoListService;
 
-    @GetMapping("getByToDoListId")
-    public DataResult<ToDoList> getByToDoListId(@RequestParam int id) {
-        return this.toDoListService.getByToDoListId(id);
+    @GetMapping("getToDoListByToDoListId")
+    public DataResult<ToDoList> getToDoListByToDoListId(@RequestParam int id) {
+        return this.toDoListService.getToDoListByToDoListId(id);
     }
 
-    @GetMapping("getByName")
+    @GetMapping("getToDoListByName")
     public DataResult<ToDoList> getByName(@RequestParam String name) {
-
-        return this.toDoListService.getByName(name);
+        return this.toDoListService.getToDoListByName(name);
     }
 
     @PostMapping("save")
-    public Result addToDoList(@RequestBody ToDoList toDoList) {
-
-        return this.toDoListService.addToDoList(toDoList);
+    public Result addToDoList(@RequestBody ToDoListRequestDto ToDoListRequestDto) {
+        return this.toDoListService.save(ToDoListRequestDto);
     }
 
     @PostMapping("delete")
@@ -39,17 +38,8 @@ public class ToDoListController {
         return this.toDoListService.deleteById(toDoListId);
     }
 
-    @PostMapping("update")
-    public Result updateTodoList(@RequestParam int toDoListId, @RequestBody ToDoList toDoList) {
-
-        return this.toDoListService.updateTodoList(toDoListId, toDoList);
-    }
-
     @GetMapping("getAll")
     public DataResult<List<ToDoList>> getAll() {
-
         return this.toDoListService.getAll();
     }
-
-
 }

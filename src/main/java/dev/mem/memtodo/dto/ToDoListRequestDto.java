@@ -13,6 +13,5 @@ import java.util.Date;
 public class ToDoListRequestDto {
     private int toDoListId;
     private String name;
-    private Date createdAt;
     private int userId;
 }

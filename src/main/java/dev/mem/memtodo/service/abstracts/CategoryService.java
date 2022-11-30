@@ -9,19 +9,13 @@ import java.util.List;
 
 public interface CategoryService {
 
-    DataResult<Category> getByCategoryId(int id);
+    DataResult<Category> getCategoryByCategoryId(int id);
 
-    DataResult<Category> getByName(String name);
+    DataResult<Category> getCategoryByName(String name);
 
-    Result addCategory(Category category);
+    Result save(Category category);
 
     Result deleteById(int categoryId);
 
-    Result updateCategory(int categoryId , Category category);
-
     DataResult<List<Category>> getAll();
-
-    DataResult<List<ToDo>>  getTodosByCategoryId(int id);
-
-
 }

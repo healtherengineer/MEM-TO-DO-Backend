@@ -1,8 +1,10 @@
 package dev.mem.memtodo.service.concretes;
 
-import dev.mem.memtodo.model.Category;
+import dev.mem.memtodo.dto.ToDoListRequestDto;
 import dev.mem.memtodo.model.ToDoList;
+import dev.mem.memtodo.model.User;
 import dev.mem.memtodo.repository.ToDoListRepository;
+import dev.mem.memtodo.repository.UserRepository;
 import dev.mem.memtodo.service.abstracts.ToDoListService;
 import dev.mem.memtodo.utilities.results.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,55 +18,59 @@ public class ToDoListManager implements ToDoListService {
     @Autowired
     private ToDoListRepository toDoListRepository;
 
-    @Override
-    public DataResult<ToDoList> getByToDoListId(int id) {
+    @Autowired
+    private UserRepository userRepository;
 
+    @Override
+    public DataResult<ToDoList> getToDoListByToDoListId(int id) {
         ToDoList toDoList = this.toDoListRepository.getByToDoListId(id);
         if (toDoList != null) {
-            return new SuccessDataResult<>(toDoList);
+            return new SuccessDataResult<>(toDoList, "ToDoList fetched!");
         } else {
 
-            return new ErrorDataResult<>(null, "TodoList is not found with this todoListId .");
+            return new ErrorDataResult<>(null, "TodoList is not found with this todoListId.");
         }
-
-
     }
 
     @Override
-    public DataResult<ToDoList> getByName(String name) {
+    public DataResult<ToDoList> getToDoListByName(String name) {
         ToDoList toDoList = this.toDoListRepository.getByName(name);
         if (toDoList != null) {
-            return new SuccessDataResult<>(toDoList);
+            return new SuccessDataResult<>(toDoList, "ToDoList fetched!");
         } else {
             return new ErrorDataResult<>(null, "ToDoList is not found with this name.");
         }
     }
 
     @Override
-    public Result addToDoList(ToDoList toDoList) {
-        this.toDoListRepository.save(toDoList);
-        return new SuccessResult("TodoList saved successfully");
+    public Result save(ToDoListRequestDto ToDoListRequestDto) {
+        User user = userRepository.getByUserId(ToDoListRequestDto.getUserId());
+        if (user == null) {
+            return new ErrorResult("No user found for given userId");
+        }
+
+        ToDoList toDoList = new ToDoList(ToDoListRequestDto, user);
+        ToDoList oldToDoList = toDoListRepository.getByToDoListId(ToDoListRequestDto.getToDoListId());
+        if (oldToDoList != null) {
+            toDoList.setCreatedAt(oldToDoList.getCreatedAt());
+        }
+
+        try {
+            this.toDoListRepository.save(toDoList);
+            return new SuccessResult("todolist saved successfully");
+        } catch (Exception e) {
+            return new ErrorResult("Error todolist not saved! => " + e.getMessage());
+        }
     }
 
     @Override
     public Result deleteById(int toDoListId) {
-
-        this.toDoListRepository.deleteById(toDoListId);
-        return new SuccessResult("TodoList deleted successfully");
-
-
-    }
-
-    @Override
-    public Result updateTodoList(int toDoListId, ToDoList toDoList) {
-        ToDoList todoListOld = this.toDoListRepository.getByToDoListId(toDoListId);
-        if (todoListOld != null) {
-            //Id yi eşitlemezsek yeni kayıt ekler. Bu yüzden Id yi setliyorum.
-            toDoList.setToDoListId(todoListOld.getToDoListId());
-            this.toDoListRepository.save(toDoList);
-            return new SuccessResult("TodoList updated succesfully.");
+        ToDoList toDoList = toDoListRepository.getByToDoListId(toDoListId);
+        if (toDoList != null) {
+            this.toDoListRepository.delete(toDoList);
+            return new SuccessResult("TodoList deleted successfully!");
         } else {
-            return new ErrorResult("TodoList was not updated.It may not be founded.");
+            return new ErrorResult("TodoList not found!");
         }
     }
 

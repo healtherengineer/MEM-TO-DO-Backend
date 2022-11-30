@@ -13,7 +13,7 @@ import java.util.Locale;
 @Service
 public class UserManager implements UserService {
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Override
     public Result save(User user) {

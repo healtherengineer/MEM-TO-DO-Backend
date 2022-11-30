@@ -1,6 +1,7 @@
 package dev.mem.memtodo.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import dev.mem.memtodo.dto.ToDoListRequestDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -31,4 +32,10 @@ public class ToDoList {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    public ToDoList(ToDoListRequestDto toDoListRequestDto,User user){
+        this.toDoListId = toDoListRequestDto.getToDoListId();
+        this.name = toDoListRequestDto.getName();
+        this.user = user;
+    }
 }
