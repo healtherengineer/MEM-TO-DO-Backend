@@ -1,5 +1,6 @@
 package dev.mem.memtodo.service.concretes;
 
+import dev.mem.memtodo.config.IndigenousPasswordEncoder;
 import dev.mem.memtodo.model.User;
 import dev.mem.memtodo.repository.UserRepository;
 import dev.mem.memtodo.service.abstracts.UserService;
@@ -15,12 +16,17 @@ public class UserManager implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private IndigenousPasswordEncoder passwordEncoder;
+
     @Override
     public Result save(User user) {
         User oldUser = userRepository.getByUserId(user.getUserId());
         user.setUsername(user.getUsername().toLowerCase(Locale.ENGLISH));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         if (oldUser != null) {
             user.setCreatedAt(oldUser.getCreatedAt());
+            user.setPassword(oldUser.getPassword());
         }
         try {
             this.userRepository.save(user);
@@ -32,12 +38,12 @@ public class UserManager implements UserService {
 
     @Override
     public Result updatePassword(int userId, String oldPassword, String newPassword) {
-        // HASH EKLENECEK
+        String oldPasswordHashed = passwordEncoder.encode(oldPassword);
         User user = userRepository.getByUserId(userId);
 
         if (user != null) {
-            if (user.getPassword().equals(oldPassword)) {
-                user.setPassword(newPassword);
+            if (user.getPassword().equals(oldPasswordHashed)) {
+                user.setPassword(passwordEncoder.encode(newPassword));
                 try {
                     this.userRepository.save(user);
                     return new SuccessResult("User password updated successfully!");

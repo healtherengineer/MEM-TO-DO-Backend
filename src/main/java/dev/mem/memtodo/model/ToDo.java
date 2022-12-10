@@ -1,9 +1,13 @@
 package dev.mem.memtodo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.mem.memtodo.dto.ToDoRequestDto;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 
 @Getter
@@ -28,12 +32,14 @@ public class ToDo {
     @Column(name = "priority", nullable = true) // 1 = low, 2 = normal, 3 = high
     private int priority;
 
-    @Column(name = "deadline", nullable = true)
-    private Date deadline;
+//    @Column(name = "deadline", nullable = true)
+//    private LocalDateTime deadline;
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Column(name = "created_at", nullable = false)
-    private Date createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now(ZoneId.of("Europe/Istanbul"));
 
+//    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "to_do_list_id")
     private ToDoList toDoList;
@@ -43,9 +49,12 @@ public class ToDo {
     private Category category;
 
     public ToDo(ToDoRequestDto toDoRequestDto, ToDoList toDoList, Category category) {
-        // DONUSUMLER YAPILACAK
-//        this.postId = postTemporaryDTO.getPostId();
-//        this.message = postTemporaryDTO.getMessage();
-//        this.user = user;
+        this.toDoId = toDoRequestDto.getToDoId();
+        this.message = toDoRequestDto.getMessage();
+        this.isFinished = toDoRequestDto.isFinished();
+        this.priority = toDoRequestDto.getPriority();
+//        this.deadline = toDoRequestDto.getDeadline();
+        this.toDoList = toDoList;
+        this.category = category;
     }
 }

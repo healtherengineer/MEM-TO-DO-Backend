@@ -28,6 +28,11 @@ public class ToDoListController {
         return this.toDoListService.getToDoListByName(name);
     }
 
+    @GetMapping("getToDoListsByUserId")
+    public DataResult<List<ToDoList>> getToDoListsByUserId(@RequestParam int userId) {
+        return this.toDoListService.getToDoListsByUserId(userId);
+    }
+
     @PostMapping("save")
     public Result addToDoList(@RequestBody ToDoListRequestDto ToDoListRequestDto) {
         return this.toDoListService.save(ToDoListRequestDto);
