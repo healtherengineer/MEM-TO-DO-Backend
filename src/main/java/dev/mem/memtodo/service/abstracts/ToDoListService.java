@@ -13,6 +13,8 @@ public interface ToDoListService {
 
     DataResult<ToDoList> getToDoListByName(String name);
 
+    DataResult<List<ToDoList>> getToDoListsByUserId(int userId);
+
     Result save(ToDoListRequestDto ToDoListRequestDto);
 
     Result deleteById(int toDoListId);

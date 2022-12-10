@@ -75,27 +75,27 @@ public class ToDoManager implements ToDoService {
 
     @Override
     public DataResult<List<ToDo>> getToDosByCategoryId(int categoryId) {
-        return null;
+        return new SuccessDataResult<>(this.toDoRepository.getToDosByCategoryId(categoryId), "Category Filtered Todos Fetched!");
     }
 
     @Override
     public DataResult<List<ToDo>> getToDosByToDoListId(int toDoListId) {
-        return null;
+        return new SuccessDataResult<>(this.toDoRepository.getToDosByToDoListId(toDoListId), "ToDoList Filtered Todos Fetched!");
     }
 
     @Override
     public DataResult<List<ToDo>> getToDosByToDoListIdAndCategoryId(int toDoListId, int categoryId) {
-        return null;
+        return new SuccessDataResult<>(this.toDoRepository.getToDosByToDoListIdAndCategoryId(toDoListId,categoryId), "Todos Fetched!(Category AND ToDoList Filtered)");
     }
 
     @Override
     public DataResult<List<ToDo>> getToDosByToDoListIdAndCategoryIdSortedPriorityAsc(int toDoListId, int categoryId) {
-        return null;
+        return new SuccessDataResult<>(this.toDoRepository.getToDosByToDoListIdAndCategoryIdSortedPriorityAsc(toDoListId, categoryId), "Todos Fetched!(Category AND ToDoList Filtered ASC)");
     }
 
     @Override
     public DataResult<List<ToDo>> getToDosByToDoListIdAndCategoryIdSortedPriorityDesc(int toDoListId, int categoryId) {
-        return null;
+        return new SuccessDataResult<>(this.toDoRepository.getToDosByToDoListIdAndCategoryIdSortedPriorityDesc(toDoListId, categoryId), "Todos Fetched!(Category AND ToDoList Filtered DESC)");
     }
 
 }

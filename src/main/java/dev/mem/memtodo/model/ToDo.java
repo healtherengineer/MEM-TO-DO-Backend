@@ -32,8 +32,8 @@ public class ToDo {
     @Column(name = "priority", nullable = true) // 1 = low, 2 = normal, 3 = high
     private int priority;
 
-    @Column(name = "deadline", nullable = true)
-    private LocalDateTime deadline;
+//    @Column(name = "deadline", nullable = true)
+//    private LocalDateTime deadline;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Column(name = "created_at", nullable = false)
@@ -53,7 +53,7 @@ public class ToDo {
         this.message = toDoRequestDto.getMessage();
         this.isFinished = toDoRequestDto.isFinished();
         this.priority = toDoRequestDto.getPriority();
-        this.deadline = toDoRequestDto.getDeadline();
+//        this.deadline = toDoRequestDto.getDeadline();
         this.toDoList = toDoList;
         this.category = category;
     }

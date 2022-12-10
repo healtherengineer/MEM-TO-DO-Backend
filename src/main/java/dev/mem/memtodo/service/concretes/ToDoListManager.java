@@ -43,6 +43,11 @@ public class ToDoListManager implements ToDoListService {
     }
 
     @Override
+    public DataResult<List<ToDoList>> getToDoListsByUserId(int userId) {
+        return new SuccessDataResult<>(this.toDoListRepository.getToDoListsByUserId(userId),"User ToDoList Fetched!");
+    }
+
+    @Override
     public Result save(ToDoListRequestDto ToDoListRequestDto) {
         User user = userRepository.getByUserId(ToDoListRequestDto.getUserId());
         if (user == null) {

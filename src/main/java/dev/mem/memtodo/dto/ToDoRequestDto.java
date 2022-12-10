@@ -14,7 +14,7 @@ public class ToDoRequestDto {
     private String message;
     private boolean isFinished;
     private int priority;
-    private LocalDateTime deadline;
+//    private LocalDateTime deadline;
     private int toDoListId;
     private int categoryId;
 }
